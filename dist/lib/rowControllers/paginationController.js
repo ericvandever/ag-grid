@@ -194,7 +194,7 @@ var PaginationController = (function () {
         this.gridPanel.showLoadingOverlay();
         var sortModel;
         if (this.gridOptionsWrapper.isEnableServerSideSorting()) {
-            sortModel = this.sortController.getSortModel();
+            sortModel = this.sortController.getServerSideSortModel();
         }
         var filterModel;
         if (this.gridOptionsWrapper.isEnableServerSideFilter()) {

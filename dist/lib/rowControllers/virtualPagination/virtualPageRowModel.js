@@ -113,7 +113,7 @@ var VirtualPageRowModel = (function () {
             datasource: this.datasource,
             // sort and filter model
             filterModel: this.filterManager.getFilterModel(),
-            sortModel: this.sortController.getSortModel(),
+            sortModel: this.sortController.getServerSideSortModel(),
             // properties - this way we take a snapshot of them, so if user changes any, they will be
             // used next time we create a new cache, which is generally after a filter or sort change,
             // or a new datasource is set
