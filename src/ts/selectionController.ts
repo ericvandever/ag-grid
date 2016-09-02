@@ -12,6 +12,7 @@ import {GridOptionsWrapper} from "./gridOptionsWrapper";
 import {PostConstruct} from "./context/context";
 import {Constants} from "./constants";
 import {IInMemoryRowModel} from "./interfaces/iInMemoryRowModel";
+import {FilterManager} from "./filter/filterManager";
 
 @Bean('selectionController')
 export class SelectionController {
@@ -19,6 +20,7 @@ export class SelectionController {
     @Autowired('eventService') private eventService: EventService;
     @Autowired('rowModel') private rowModel: IRowModel;
     @Autowired('gridOptionsWrapper') private gridOptionsWrapper: GridOptionsWrapper;
+    @Autowired('filterManager') private filterManager: FilterManager;
 
     private selectedNodes: {[key: string]: RowNode};
     private logger: Logger;
@@ -223,6 +225,20 @@ export class SelectionController {
         }
         this.rowModel.forEachNode( (rowNode: RowNode) => {
             rowNode.selectThisNode(true);
+        });
+        this.eventService.dispatchEvent(Events.EVENT_SELECTION_CHANGED);
+    }
+
+    public selectAllUnfilteredRowNodes() {
+        if (this.rowModel.getType()!==Constants.ROW_MODEL_TYPE_NORMAL) {
+            throw 'selectAll only available with normal row model, ie not virtual pagination';
+        }
+        this.rowModel.forEachNode( (rowNode: RowNode) => {
+            if (this.filterManager.doesRowPassFilter(rowNode)) {
+                rowNode.selectThisNode(true);
+            } else {
+                rowNode.selectThisNode(false);
+            }
         });
         this.eventService.dispatchEvent(Events.EVENT_SELECTION_CHANGED);
     }

@@ -275,6 +275,10 @@ export class GridApi {
         this.selectionController.selectAllRowNodes();
     }
 
+    public selectAllUnfiltered() {
+        this.selectionController.selectAllUnfilteredRowNodes();
+    }
+
     public deselectAll() {
         this.selectionController.deselectAllRowNodes();
     }
