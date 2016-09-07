@@ -94,6 +94,7 @@ var mainOverlayTemplate =
         '<div class="ag-overlay-wrapper ag-overlay-[OVERLAY_NAME]-wrapper">[OVERLAY_TEMPLATE]</div>'+
     '</div>';
 
+var defaultErrorOverlayTemplate = '<span class="ag-overlay-error-center">[ERROR...]</span>';
 var defaultLoadingOverlayTemplate = '<span class="ag-overlay-loading-center">[LOADING...]</span>';
 var defaultNoRowsOverlayTemplate = '<span class="ag-overlay-no-rows-center">[NO_ROWS_TO_SHOW]</span>';
 
@@ -170,6 +171,7 @@ export class GridPanel extends BeanStub {
     private enableRtl: boolean;
     private forPrint: boolean;
     private scrollWidth: number;
+    private errorMessage: string;
 
     public agWire(@Qualifier('loggerFactory') loggerFactory: LoggerFactory) {
         this.logger = loggerFactory.create('GridPanel');
@@ -233,6 +235,7 @@ export class GridPanel extends BeanStub {
 
         this.layout = new BorderLayout({
             overlays: {
+                error: _.loadTemplate(this.createErrorOverlayTemplate()),
                 loading: _.loadTemplate(this.createLoadingOverlayTemplate()),
                 noRows: _.loadTemplate(this.createNoRowsOverlayTemplate())
             },
@@ -574,6 +577,23 @@ export class GridPanel extends BeanStub {
         return template;
     }
 
+    private createErrorOverlayTemplate(): string {
+
+        var userProvidedTemplate = this.gridOptionsWrapper.getOverlayErrorTemplate();
+
+        var templateNotLocalised = this.createOverlayTemplate(
+          'error',
+          defaultErrorOverlayTemplate,
+          userProvidedTemplate);
+
+        var localeTextFunc = this.gridOptionsWrapper.getLocaleTextFunc();
+        this.errorMessage = 'Error...';
+        var templateLocalised = templateNotLocalised.replace('[ERROR...]',
+          localeTextFunc('error', this.errorMessage));
+
+        return templateLocalised;
+    }
+
     private createLoadingOverlayTemplate(): string {
 
         var userProvidedTemplate = this.gridOptionsWrapper.getOverlayLoadingTemplate();
@@ -835,6 +855,17 @@ export class GridPanel extends BeanStub {
     public showNoRowsOverlay(): void {
         if (!this.gridOptionsWrapper.isSuppressNoRowsOverlay()) {
             this.layout.showOverlay('noRows');
+        }
+    }
+
+    public showErrorOverlay(errorMsg: string): void {
+        if (!this.gridOptionsWrapper.isSuppressErrorOverlay()) {
+            if (this.errorMessage !== errorMsg) {
+                var errorOverlay = this.layout.getOverlay('error');
+                errorOverlay.innerHTML = errorOverlay.innerHTML.replace(this.errorMessage, errorMsg);
+                this.errorMessage = errorMsg;
+            }
+            this.layout.showOverlay('error');
         }
     }
 
