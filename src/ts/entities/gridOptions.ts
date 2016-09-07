@@ -49,6 +49,7 @@ export interface GridOptions {
     angularCompileHeaders?: boolean;
     suppressLoadingOverlay?: boolean;
     suppressNoRowsOverlay?: boolean;
+    suppressErrorOverlay?: boolean;
     suppressAutoSize?: boolean;
     autoSizePadding?: number;
     suppressColumnMoveAnimation?: boolean;
@@ -125,6 +126,7 @@ export interface GridOptions {
     slaveGrids?: GridOptions[];
     rowSelection?: string;
     rowDeselection?: boolean;
+    overlayErrorTemplate?: string;
     overlayLoadingTemplate?: string;
     overlayNoRowsTemplate?: string;
     checkboxSelection?: Function;
