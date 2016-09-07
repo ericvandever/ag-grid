@@ -206,6 +206,7 @@ export class GridOptionsWrapper {
     public isSuppressHorizontalScroll() { return isTrue(this.gridOptions.suppressHorizontalScroll); }
     public isSuppressLoadingOverlay() { return isTrue(this.gridOptions.suppressLoadingOverlay); }
     public isSuppressNoRowsOverlay() { return isTrue(this.gridOptions.suppressNoRowsOverlay); }
+    public isSuppressErrorOverlay() { return isTrue(this.gridOptions.suppressErrorOverlay); }
     public isSuppressFieldDotNotation() { return isTrue(this.gridOptions.suppressFieldDotNotation); }
     public getFloatingTopRowData(): any[] { return this.gridOptions.floatingTopRowData; }
     public getFloatingBottomRowData(): any[] { return this.gridOptions.floatingBottomRowData; }
@@ -299,6 +300,7 @@ export class GridOptionsWrapper {
     public getSortingOrder(): string[] { return this.gridOptions.sortingOrder; }
     public getSlaveGrids(): GridOptions[] { return this.gridOptions.slaveGrids; }
     public getGroupRowRendererParams() { return this.gridOptions.groupRowRendererParams; }
+    public getOverlayErrorTemplate() { return this.gridOptions.overlayErrorTemplate; }
     public getOverlayLoadingTemplate() { return this.gridOptions.overlayLoadingTemplate; }
     public getOverlayNoRowsTemplate() { return this.gridOptions.overlayNoRowsTemplate; }
     public isSuppressAutoSize() { return isTrue(this.gridOptions.suppressAutoSize); }

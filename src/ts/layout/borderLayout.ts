@@ -309,4 +309,8 @@ export class BorderLayout {
         }
     }
 
+    getOverlay(key: string) {
+        return this.overlays ? this.overlays[key] : null;
+    }
+
 }
