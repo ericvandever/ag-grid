@@ -279,8 +279,8 @@ export class GridApi {
         this.selectionController.selectAllUnfilteredRowNodes();
     }
 
-    public deselectAll() {
-        this.selectionController.deselectAllRowNodes();
+    public deselectAll(suppressEvents: boolean = false) {
+        this.selectionController.deselectAllRowNodes(suppressEvents);
     }
 
     public recomputeAggregates(): void {

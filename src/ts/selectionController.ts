@@ -201,7 +201,7 @@ export class SelectionController {
         return count === 0;
     }
 
-    public deselectAllRowNodes() {
+    public deselectAllRowNodes(suppressEvents: boolean) {
         _.iterateObject(this.selectedNodes, (nodeId: string, rowNode: RowNode) => {
             if (rowNode) {
                 rowNode.selectThisNode(false);
@@ -216,7 +216,9 @@ export class SelectionController {
         // that we pick up, however it's good to clean it down, as we are still
         // left with entries pointing to 'undefined'
         this.selectedNodes = {};
-        this.eventService.dispatchEvent(Events.EVENT_SELECTION_CHANGED);
+        if (!suppressEvents) {
+            this.eventService.dispatchEvent(Events.EVENT_SELECTION_CHANGED);
+        }
     }
 
     public selectAllRowNodes() {
