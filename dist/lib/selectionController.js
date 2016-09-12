@@ -26,6 +26,7 @@ var context_3 = require("./context/context");
 var gridOptionsWrapper_1 = require("./gridOptionsWrapper");
 var context_4 = require("./context/context");
 var constants_1 = require("./constants");
+var filterManager_1 = require("./filter/filterManager");
 var SelectionController = (function () {
     function SelectionController() {
     }
@@ -178,7 +179,7 @@ var SelectionController = (function () {
         });
         return count === 0;
     };
-    SelectionController.prototype.deselectAllRowNodes = function () {
+    SelectionController.prototype.deselectAllRowNodes = function (suppressEvents) {
         utils_1.Utils.iterateObject(this.selectedNodes, function (nodeId, rowNode) {
             if (rowNode) {
                 rowNode.selectThisNode(false);
@@ -192,7 +193,9 @@ var SelectionController = (function () {
         // that we pick up, however it's good to clean it down, as we are still
         // left with entries pointing to 'undefined'
         this.selectedNodes = {};
-        this.eventService.dispatchEvent(events_1.Events.EVENT_SELECTION_CHANGED);
+        if (!suppressEvents) {
+            this.eventService.dispatchEvent(events_1.Events.EVENT_SELECTION_CHANGED);
+        }
     };
     SelectionController.prototype.selectAllRowNodes = function () {
         if (this.rowModel.getType() !== constants_1.Constants.ROW_MODEL_TYPE_NORMAL) {
@@ -200,6 +203,21 @@ var SelectionController = (function () {
         }
         this.rowModel.forEachNode(function (rowNode) {
             rowNode.selectThisNode(true);
+        });
+        this.eventService.dispatchEvent(events_1.Events.EVENT_SELECTION_CHANGED);
+    };
+    SelectionController.prototype.selectAllUnfilteredRowNodes = function () {
+        var _this = this;
+        if (this.rowModel.getType() !== constants_1.Constants.ROW_MODEL_TYPE_NORMAL) {
+            throw 'selectAll only available with normal row model, ie not virtual pagination';
+        }
+        this.rowModel.forEachNode(function (rowNode) {
+            if (_this.filterManager.doesRowPassFilter(rowNode)) {
+                rowNode.selectThisNode(true);
+            }
+            else {
+                rowNode.selectThisNode(false);
+            }
         });
         this.eventService.dispatchEvent(events_1.Events.EVENT_SELECTION_CHANGED);
     };
@@ -233,6 +251,10 @@ var SelectionController = (function () {
         context_3.Autowired('gridOptionsWrapper'), 
         __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
     ], SelectionController.prototype, "gridOptionsWrapper", void 0);
+    __decorate([
+        context_3.Autowired('filterManager'), 
+        __metadata('design:type', filterManager_1.FilterManager)
+    ], SelectionController.prototype, "filterManager", void 0);
     __decorate([
         __param(0, context_2.Qualifier('loggerFactory')), 
         __metadata('design:type', Function), 

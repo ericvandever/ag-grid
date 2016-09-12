@@ -63,6 +63,7 @@ export declare class GridPanel {
     private animationThreadCount;
     private destroyFunctions;
     private useScrollLag;
+    private errorMessage;
     agWire(loggerFactory: LoggerFactory): void;
     private destroy();
     private onRowDataChanged();
@@ -89,6 +90,7 @@ export declare class GridPanel {
     getPinnedRightFloatingBottom(): HTMLElement;
     getFloatingBottomContainer(): HTMLElement;
     private createOverlayTemplate(name, defaultTemplate, userProvidedTemplate);
+    private createErrorOverlayTemplate();
     private createLoadingOverlayTemplate();
     private createNoRowsOverlayTemplate();
     ensureIndexVisible(index: any): void;
@@ -102,6 +104,7 @@ export declare class GridPanel {
     ensureColumnVisible(key: any): void;
     showLoadingOverlay(): void;
     showNoRowsOverlay(): void;
+    showErrorOverlay(errorMsg: string): void;
     hideOverlay(): void;
     private getWidthForSizeColsToFit();
     sizeColumnsToFit(nextTimeout?: number): void;

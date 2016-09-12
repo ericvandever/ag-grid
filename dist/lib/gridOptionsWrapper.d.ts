@@ -49,6 +49,7 @@ export declare class GridOptionsWrapper {
     isSuppressHorizontalScroll(): boolean;
     isSuppressLoadingOverlay(): boolean;
     isSuppressNoRowsOverlay(): boolean;
+    isSuppressErrorOverlay(): boolean;
     isSuppressFieldDotNotation(): boolean;
     getFloatingTopRowData(): any[];
     getFloatingBottomRowData(): any[];
@@ -126,6 +127,7 @@ export declare class GridOptionsWrapper {
     getGroupRowInnerRenderer(): {
         new (): ICellRenderer;
     } | ICellRendererFunc | string;
+    getOverlayErrorTemplate(): string;
     getOverlayLoadingTemplate(): string;
     getOverlayNoRowsTemplate(): string;
     getCheckboxSelection(): Function;
