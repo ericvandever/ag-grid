@@ -7590,6 +7590,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    GridPanel.prototype.showLoadingOverlay = function () {
 	        if (!this.gridOptionsWrapper.isSuppressLoadingOverlay()) {
+	            this.rowModel.getRowCount() == 0 ?
+	                this.layout.getOverlay('loading').classList.add("initial") :
+	                this.layout.getOverlay('loading').classList.remove("initial");
 	            this.layout.showOverlay('loading');
 	        }
 	    };
