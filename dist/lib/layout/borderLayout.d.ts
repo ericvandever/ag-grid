@@ -46,4 +46,5 @@ export declare class BorderLayout {
     private setupOverlays();
     hideOverlay(): void;
     showOverlay(key: string): void;
+    getOverlay(key: string): any;
 }

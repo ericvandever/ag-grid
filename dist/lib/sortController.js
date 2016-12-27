@@ -98,6 +98,18 @@ var SortController = (function () {
             };
         });
     };
+    SortController.prototype.getServerSideSortModel = function () {
+        var columnsWithSorting = this.getColumnsWithSortingOrdered();
+        // TODO custom for SNAP - should probably rewrite to take a function
+        return utils_1.Utils.map(columnsWithSorting, function (column) {
+            return {
+                field: column.getColId(),
+                dir: column.getSort(),
+                type: column.getColDef().type,
+                subType: column.getColDef().subType
+            };
+        });
+    };
     SortController.prototype.setSortModel = function (sortModel) {
         if (!this.gridOptionsWrapper.isEnableSorting()) {
             console.warn('ag-grid: You are setting the sort model on a grid that does not have sorting enabled');

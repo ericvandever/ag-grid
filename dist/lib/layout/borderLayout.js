@@ -225,6 +225,9 @@ var BorderLayout = (function () {
             this.hideOverlay();
         }
     };
+    BorderLayout.prototype.getOverlay = function (key) {
+        return this.overlays ? this.overlays[key] : null;
+    };
     BorderLayout.TEMPLATE_FULL_HEIGHT = '<div class="ag-bl ag-bl-full-height">' +
         '  <div class="ag-bl-west ag-bl-full-height-west" id="west"></div>' +
         '  <div class="ag-bl-east ag-bl-full-height-east" id="east"></div>' +
