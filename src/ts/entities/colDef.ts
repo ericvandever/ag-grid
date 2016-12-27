@@ -225,6 +225,9 @@ export interface ColDef extends AbstractColDef {
     /** Never set this, it is used internally by grid when doing in-grid pivoting */
     pivotValueColumn?: Column;
 
+    type?: string;
+
+    subType?: string;
 }
 
 export interface IsColumnFunc {

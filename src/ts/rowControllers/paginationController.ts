@@ -240,7 +240,7 @@ export class PaginationController {
 
         var sortModel: any;
         if (this.gridOptionsWrapper.isEnableServerSideSorting()) {
-            sortModel = this.sortController.getSortModel();
+            sortModel = this.sortController.getServerSideSortModel();
         }
 
         var filterModel: any;
