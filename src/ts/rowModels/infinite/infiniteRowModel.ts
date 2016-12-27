@@ -157,7 +157,7 @@ export class InfiniteRowModel extends BeanStub implements IRowModel {
 
             // sort and filter model
             filterModel: this.filterManager.getFilterModel(),
-            sortModel: this.sortController.getSortModel(),
+            sortModel: this.sortController.getServerSideSortModel(),
 
             rowNodeBlockLoader: this.rowNodeBlockLoader,
 

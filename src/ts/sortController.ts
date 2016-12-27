@@ -113,6 +113,20 @@ export class SortController {
         });
     }
 
+    public getServerSideSortModel() {
+        var columnsWithSorting = this.getColumnsWithSortingOrdered();
+
+        // TODO custom for SNAP - should probably rewrite to take a function
+        return _.map(columnsWithSorting, (column: Column) => {
+            return {
+                field: column.getColId(),
+                dir: column.getSort(),
+                type: column.getColDef().type,
+                subType: column.getColDef().subType
+            }
+        });
+    }
+
     public setSortModel(sortModel: any) {
         if (!this.gridOptionsWrapper.isEnableSorting()) {
             console.warn('ag-grid: You are setting the sort model on a grid that does not have sorting enabled');
