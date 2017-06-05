@@ -17,6 +17,12 @@ export declare class SortController {
         colId: string;
         sort: string;
     }[];
+    getServerSideSortModel(): {
+        field: string;
+        dir: string;
+        type: string;
+        subType: string;
+    }[];
     setSortModel(sortModel: any): void;
     getColumnsWithSortingOrdered(): Column[];
     getSortForRowController(): any[];

@@ -280,8 +280,12 @@ var GridApi = (function () {
     GridApi.prototype.selectAll = function () {
         this.selectionController.selectAllRowNodes();
     };
-    GridApi.prototype.deselectAll = function () {
-        this.selectionController.deselectAllRowNodes();
+    GridApi.prototype.selectAllUnfiltered = function () {
+        this.selectionController.selectAllUnfilteredRowNodes();
+    };
+    GridApi.prototype.deselectAll = function (suppressEvents) {
+        if (suppressEvents === void 0) { suppressEvents = false; }
+        this.selectionController.deselectAllRowNodes(false, suppressEvents);
     };
     GridApi.prototype.selectAllFiltered = function () {
         this.selectionController.selectAllRowNodes(true);
@@ -307,6 +311,9 @@ var GridApi = (function () {
     };
     GridApi.prototype.showNoRowsOverlay = function () {
         this.gridPanel.showNoRowsOverlay();
+    };
+    GridApi.prototype.showErrorOverlay = function (errorMsg) {
+        this.gridPanel.showErrorOverlay(errorMsg);
     };
     GridApi.prototype.hideOverlay = function () {
         this.gridPanel.hideOverlay();

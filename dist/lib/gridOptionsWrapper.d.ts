@@ -82,6 +82,7 @@ export declare class GridOptionsWrapper {
     isSuppressHorizontalScroll(): boolean;
     isSuppressLoadingOverlay(): boolean;
     isSuppressNoRowsOverlay(): boolean;
+    isSuppressErrorOverlay(): boolean;
     isSuppressFieldDotNotation(): boolean;
     getFloatingTopRowData(): any[];
     getFloatingBottomRowData(): any[];
@@ -169,6 +170,7 @@ export declare class GridOptionsWrapper {
     getSortingOrder(): string[];
     getSlaveGrids(): GridOptions[];
     getGroupRowRendererParams(): any;
+    getOverlayErrorTemplate(): string;
     getOverlayLoadingTemplate(): string;
     getOverlayNoRowsTemplate(): string;
     isSuppressAutoSize(): boolean;

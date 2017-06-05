@@ -226,6 +226,9 @@ var BorderLayout = (function () {
             this.hideOverlay();
         }
     };
+    BorderLayout.prototype.getOverlay = function (key) {
+        return this.overlays ? this.overlays[key] : null;
+    };
     return BorderLayout;
 }());
 BorderLayout.TEMPLATE_FULL_HEIGHT = '<div class="ag-bl ag-bl-full-height">' +
