@@ -372,7 +372,7 @@ export class GridApi {
     }
 
     public deselectAll(suppressEvents: boolean = false) {
-        this.selectionController.deselectAllRowNodes(suppressEvents);
+        this.selectionController.deselectAllRowNodes(false, suppressEvents);
     }
 
     public selectAllFiltered() {

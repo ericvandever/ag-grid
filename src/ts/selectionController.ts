@@ -232,7 +232,7 @@ export class SelectionController {
         return count === 0;
     }
 
-    public deselectAllRowNodes(justFiltered = false, suppressEvents: boolean) {
+    public deselectAllRowNodes(justFiltered = false, suppressEvents = false) {
 
         let inMemoryRowModel = <InMemoryRowModel> this.rowModel;
         let callback = (rowNode: RowNode) => rowNode.selectThisNode(false);
