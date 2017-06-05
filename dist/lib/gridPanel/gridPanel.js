@@ -119,6 +119,7 @@ var GRID_PANEL_FOR_PRINT_TEMPLATE = '<div class="ag-root ag-font-style">' +
 var OVERLAY_TEMPLATE = '<div class="ag-overlay-panel">' +
     '<div class="ag-overlay-wrapper ag-overlay-[OVERLAY_NAME]-wrapper">[OVERLAY_TEMPLATE]</div>' +
     '</div>';
+var ERROR_OVERLAY_TEMPLATE = '<span class="ag-overlay-error-center">[ERROR...]</span>';
 var LOADING_OVERLAY_TEMPLATE = '<span class="ag-overlay-loading-center">[LOADING...]</span>';
 var NO_ROWS_TO_SHOW_OVERLAY_TEMPLATE = '<span class="ag-overlay-no-rows-center">[NO_ROWS_TO_SHOW]</span>';
 var GridPanel = (function (_super) {
@@ -174,6 +175,7 @@ var GridPanel = (function (_super) {
         this.addDragListeners();
         this.layout = new borderLayout_1.BorderLayout({
             overlays: {
+                error: utils_1.Utils.loadTemplate(this.createErrorOverlayTemplate()),
                 loading: utils_1.Utils.loadTemplate(this.createLoadingOverlayTemplate()),
                 noRows: utils_1.Utils.loadTemplate(this.createNoRowsOverlayTemplate())
             },
@@ -671,6 +673,14 @@ var GridPanel = (function (_super) {
         }
         return template;
     };
+    GridPanel.prototype.createErrorOverlayTemplate = function () {
+        var userProvidedTemplate = this.gridOptionsWrapper.getOverlayErrorTemplate();
+        var templateNotLocalised = this.createOverlayTemplate('error', ERROR_OVERLAY_TEMPLATE, userProvidedTemplate);
+        var localeTextFunc = this.gridOptionsWrapper.getLocaleTextFunc();
+        this.errorMessage = 'Error...';
+        var templateLocalised = templateNotLocalised.replace('[ERROR...]', localeTextFunc('error', this.errorMessage));
+        return templateLocalised;
+    };
     GridPanel.prototype.createLoadingOverlayTemplate = function () {
         var userProvidedTemplate = this.gridOptionsWrapper.getOverlayLoadingTemplate();
         var templateNotLocalised = this.createOverlayTemplate('loading', LOADING_OVERLAY_TEMPLATE, userProvidedTemplate);
@@ -915,12 +925,25 @@ var GridPanel = (function (_super) {
     };
     GridPanel.prototype.showLoadingOverlay = function () {
         if (!this.gridOptionsWrapper.isSuppressLoadingOverlay()) {
+            this.paginationProxy.getRowCount() == 0 ?
+                this.layout.getOverlay('loading').classList.add("initial") :
+                this.layout.getOverlay('loading').classList.remove("initial");
             this.layout.showOverlay('loading');
         }
     };
     GridPanel.prototype.showNoRowsOverlay = function () {
         if (!this.gridOptionsWrapper.isSuppressNoRowsOverlay()) {
             this.layout.showOverlay('noRows');
+        }
+    };
+    GridPanel.prototype.showErrorOverlay = function (errorMsg) {
+        if (!this.gridOptionsWrapper.isSuppressErrorOverlay()) {
+            if (this.errorMessage !== errorMsg) {
+                var errorOverlay = this.layout.getOverlay('error');
+                errorOverlay.innerHTML = errorOverlay.innerHTML.replace(this.errorMessage, errorMsg);
+                this.errorMessage = errorMsg;
+            }
+            this.layout.showOverlay('error');
         }
     };
     GridPanel.prototype.hideOverlay = function () {

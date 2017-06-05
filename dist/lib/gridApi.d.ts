@@ -97,13 +97,15 @@ export declare class GridApi {
     selectNode(node: RowNode, tryMulti?: boolean, suppressEvents?: boolean): void;
     deselectNode(node: RowNode, suppressEvents?: boolean): void;
     selectAll(): void;
-    deselectAll(): void;
+    selectAllUnfiltered(): void;
+    deselectAll(suppressEvents?: boolean): void;
     selectAllFiltered(): void;
     deselectAllFiltered(): void;
     recomputeAggregates(): void;
     sizeColumnsToFit(): void;
     showLoadingOverlay(): void;
     showNoRowsOverlay(): void;
+    showErrorOverlay(errorMsg: string): void;
     hideOverlay(): void;
     isNodeSelected(node: any): any;
     getSelectedNodesById(): {

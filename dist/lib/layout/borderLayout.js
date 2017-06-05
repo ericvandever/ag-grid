@@ -238,6 +238,9 @@ var BorderLayout = (function () {
             this.hideOverlay();
         }
     };
+    BorderLayout.prototype.getOverlay = function (key) {
+        return this.overlays ? this.overlays[key] : null;
+    };
     return BorderLayout;
 }());
 // this is used if there user has not specified any north or south parts

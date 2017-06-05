@@ -83,6 +83,7 @@ export declare class GridPanel extends BeanStub {
     private forPrint;
     private autoHeight;
     private scrollWidth;
+    private errorMessage;
     private pinningRight;
     private pinningLeft;
     agWire(loggerFactory: LoggerFactory): void;
@@ -117,6 +118,7 @@ export declare class GridPanel extends BeanStub {
     private onCtrlAndV(event);
     private onCtrlAndD(event);
     private createOverlayTemplate(name, defaultTemplate, userProvidedTemplate);
+    private createErrorOverlayTemplate();
     private createLoadingOverlayTemplate();
     private createNoRowsOverlayTemplate();
     ensureIndexVisible(index: any): void;
@@ -132,6 +134,7 @@ export declare class GridPanel extends BeanStub {
     ensureColumnVisible(key: any): void;
     showLoadingOverlay(): void;
     showNoRowsOverlay(): void;
+    showErrorOverlay(errorMsg: string): void;
     hideOverlay(): void;
     private getWidthForSizeColsToFit();
     sizeColumnsToFit(nextTimeout?: number): void;

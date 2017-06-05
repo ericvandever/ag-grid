@@ -110,6 +110,18 @@ var SortController = SortController_1 = (function () {
             };
         });
     };
+    SortController.prototype.getServerSideSortModel = function () {
+        var columnsWithSorting = this.getColumnsWithSortingOrdered();
+        // TODO custom for SNAP - should probably rewrite to take a function
+        return utils_1.Utils.map(columnsWithSorting, function (column) {
+            return {
+                field: column.getColId(),
+                dir: column.getSort(),
+                type: column.getColDef().type,
+                subType: column.getColDef().subType
+            };
+        });
+    };
     SortController.prototype.setSortModel = function (sortModel) {
         var _this = this;
         if (!this.gridOptionsWrapper.isEnableSorting()) {

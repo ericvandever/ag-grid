@@ -170,6 +170,7 @@ var GridOptionsWrapper = GridOptionsWrapper_1 = (function () {
     GridOptionsWrapper.prototype.isSuppressHorizontalScroll = function () { return isTrue(this.gridOptions.suppressHorizontalScroll); };
     GridOptionsWrapper.prototype.isSuppressLoadingOverlay = function () { return isTrue(this.gridOptions.suppressLoadingOverlay); };
     GridOptionsWrapper.prototype.isSuppressNoRowsOverlay = function () { return isTrue(this.gridOptions.suppressNoRowsOverlay); };
+    GridOptionsWrapper.prototype.isSuppressErrorOverlay = function () { return isTrue(this.gridOptions.suppressErrorOverlay); };
     GridOptionsWrapper.prototype.isSuppressFieldDotNotation = function () { return isTrue(this.gridOptions.suppressFieldDotNotation); };
     GridOptionsWrapper.prototype.getFloatingTopRowData = function () { return this.gridOptions.floatingTopRowData; };
     GridOptionsWrapper.prototype.getFloatingBottomRowData = function () { return this.gridOptions.floatingBottomRowData; };
@@ -260,6 +261,7 @@ var GridOptionsWrapper = GridOptionsWrapper_1 = (function () {
     GridOptionsWrapper.prototype.getSortingOrder = function () { return this.gridOptions.sortingOrder; };
     GridOptionsWrapper.prototype.getSlaveGrids = function () { return this.gridOptions.slaveGrids; };
     GridOptionsWrapper.prototype.getGroupRowRendererParams = function () { return this.gridOptions.groupRowRendererParams; };
+    GridOptionsWrapper.prototype.getOverlayErrorTemplate = function () { return this.gridOptions.overlayErrorTemplate; };
     GridOptionsWrapper.prototype.getOverlayLoadingTemplate = function () { return this.gridOptions.overlayLoadingTemplate; };
     GridOptionsWrapper.prototype.getOverlayNoRowsTemplate = function () { return this.gridOptions.overlayNoRowsTemplate; };
     GridOptionsWrapper.prototype.isSuppressAutoSize = function () { return isTrue(this.gridOptions.suppressAutoSize); };

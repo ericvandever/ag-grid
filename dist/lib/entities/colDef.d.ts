@@ -209,6 +209,8 @@ export interface ColDef extends AbstractColDef {
     floatingFilterComponentFramework?: {
         new (): any;
     };
+    type?: string;
+    subType?: string;
 }
 export interface IsColumnFunc {
     (params: IsColumnFuncParams): boolean;
